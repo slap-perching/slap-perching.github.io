@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SLAP: Slapband-based Autonomous Perching Drone</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>
+    SLAP: Slapband-based Autonomous Perching Drone<br>
+    with Failure Recovery for Vertical Tree Trunks
+  </h1>
+
+  <div class="authors">
+    <p>
+      Julia Di<sup>1</sup>,
+      Kenneth A. W. Hoffmann<sup>1</sup>,
+      Tony G. Chen<sup>2</sup>,
+      Tian-Ao Ren<sup>1</sup>,
+      Mark Cutkosky<sup>1</sup>
+    </p>
+    <p class="affiliations">
+      <sup>1</sup>Stanford University &nbsp;&nbsp;
+      <sup>2</sup>Georgia Institute of Technology
+    </p>
+  </div>
+
+  <div class="links">
+    <a href="assets/pdfs/SLAP_paper.pdf">📄 Paper (PDF)</a>
+    <a href="https://github.com/yourusername/SLAP">💻 Code</a>
+    <a href="#video">🎥 Video</a>
+  </div>
+
+  <img src="assets/images/teaser.png" class="teaser">
+
+  <h2>Abstract</h2>
+  <p class="abstract">
+    Perching allows unmanned aerial vehicles (UAVs) to reduce energy
+    consumption, remain anchored for surface sampling operations,
+    or stably survey their surroundings. Previous efforts for perching
+    on vertical surfaces have predominantly focused on lightweight
+    mechanical design solutions with relatively scant system-level
+    integration. Furthermore, perching strategies for vertical surfaces
+    commonly require high-speed, aggressive landing operations that are
+    dangerous for a surveyor drone with sensitive electronics onboard.
+    <br><br>
+    This work presents the preliminary investigation of a perching
+    approach suitable for larger drones that both gently perches on
+    vertical tree trunks and reacts and recovers from perch failures.
+    The system in this work, called SLAP, consists of a vision-based
+    perch site detector, an IMU-based perch failure detector, an
+    attitude controller for soft perching, an optical close-range
+    detection system, and a fast active elastic gripper with microspines
+    made from commercially-available slapbands.
+    <br><br>
+    We validated this approach on a modified 1.2 kg commercial quadrotor.
+    Indoor flight experiments achieved a 75% perch success rate across
+    20 trials, and 100% perch failure recovery across induced failures.
+  </p>
+
+  <h2 id="video">Video</h2>
+  <video controls width="800">
+    <source src="assets/videos/slap_demo.mp4" type="video/mp4">
+  </video>
+
+  <h2>System Overview</h2>
+  <img src="assets/images/system_overview.png" class="figure">
+
+  <h2>Hardware</h2>
+  <img src="assets/images/hardware.png" class="figure">
+
+  <h2>Results</h2>
+  <img src="assets/images/results.png" class="figure">
+
+  <footer>
+    <p>
+      © 2026 SLAP Project • Stanford University
+    </p>
+  </footer>
+
+</div>
+
+</body>
+</html>
