@@ -1,0 +1,71 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #ffffff;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 900px;
+  margin: auto;
+  padding: 30px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 28px;
+}
+
+h2 {
+  margin-top: 40px;
+}
+
+.authors {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.affiliations {
+  font-size: 14px;
+  color: #555;
+}
+
+.links {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.links a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #0066cc;
+  font-weight: bold;
+}
+
+.teaser {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.abstract {
+  text-align: justify;
+  line-height: 1.5;
+}
+
+.figure {
+  width: 100%;
+  margin-top: 15px;
+}
+
+video {
+  display: block;
+  margin: auto;
+}
+
+footer {
+  margin-top: 50px;
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+}
