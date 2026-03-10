@@ -30,10 +30,14 @@
   </div>
 
   <div class="links">
-    <a href="assets/pdfs/SLAP_paper.pdf">📄 Paper (PDF)</a>
-    <a href="https://github.com/yourusername/SLAP">💻 Code</a>
+    <a href="https://arxiv.org/pdf/2601.00238">📄 Paper (PDF)</a>
+    <a href="https://github.com/JuliaDi/Tree-Perching-Code/">💻 Code</a>
     <a href="#video">🎥 Video</a>
   </div>
+
+    <p style="text-align: center; margin: 20px 0; padding: 15px; background: #e8f4f8; border: 1px solid #b8d4db; border-radius: 8px; font-weight: bold; color: #2c5282;">
+    📄 This paper was accepted to <strong>IEEE Aerospace Conference 2026</strong>
+  </p>
 
   <img src="assets/images/teaser.png" class="teaser">
 
@@ -62,27 +66,108 @@
     20 trials, and 100% perch failure recovery across induced failures.
   </p>
 
-  <h2 id="video">Video</h2>
-  <video controls width="800">
-    <source src="assets/videos/slap_demo.mp4" type="video/mp4">
-  </video>
+  <h2 id="video">Video Demo</h2>
+  <div style="text-align: center;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/pSHYocGOC5U?si=wXgmdB-gU7oS6Fpp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
 
   <h2>System Overview</h2>
+  <p>
+    The SLAP system consists of five main components that work together to enable autonomous perching on vertical tree trunks:
+  </p>
+  <ul>
+    <li><strong>Vision-based Perch Site Detector:</strong> Uses an Intel Realsense D435 RGBD camera with a deep-learned model based on PercepTree to detect suitable tree sections and select optimal perch sites based on tree diameter, bark texture, and contour.</li>
+    <li><strong>IMU-based Perch Failure Detector:</strong> Monitors drone attitude using accelerometer data to detect the onset of slipping within 100ms, enabling rapid recovery maneuvers.</li>
+    <li><strong>Attitude Controller for Soft Perching:</strong> Implements a gentle perch controller that decreases thrust from hover to zero over 4 seconds at 100Hz to minimize stress on the gripper and prevent microspine slippage.</li>
+    <li><strong>Optical Close-range Detection System:</strong> Uses a time-of-flight sensor (VL53L1X) to measure distance to the tree and electronically trigger the gripper when the threshold distance is reached.</li>
+    <li><strong>Fast Active Elastic Gripper:</strong> Features bistable tape springs modified from commercially available slap bands that snap around the tree trunk.  Microspines at the tips of the slapbands penetrate the bark for secure attachment.</li>
+  </ul>
   <img src="assets/images/system_overview.png" class="figure">
 
   <h2>Hardware</h2>
+  <p>
+    The SLAP system is built on a modified Uvify IFO-S quadrotor platform with the following key hardware components:
+  </p>
+  <h3>Base Platform</h3>
+  <ul>
+    <li><strong>Quadrotor:</strong> Modified Uvify IFO-S (1kg stock, 1.2kg with perching hardware)</li>
+    <li><strong>Onboard Computer:</strong> NVIDIA Jetson Nano for low-level control and PX4 autopilot interface</li>
+    <li><strong>Off-board Computer:</strong> NVIDIA Orin for high-level processing (indoor flights)</li>
+    <li><strong>Safety Features:</strong> 3D-printed PLA bumper with foam pool noodle cushioning, foam balls on legs for soft landings</li>
+  </ul>
+  
+  <h3>Active Gripper Design and Avionics</h3>
+  <ul>
+    <li><strong>Gripper Weight:</strong> 125g (3D-printed on Formlabs Form 3+ with Rigid 4k resin)</li>
+    <li><strong>Grasp Mechanism:</strong> Two bistable tape springs (BRANDWINLITE BW-SB05-BK) that snap closed in 6ms</li>
+    <li><strong>Microspines:</strong> Four organ needles per band with epoxy-filled eyelets, glued in 3D-printed tiles</li>
+    <li><strong>Trigger System:</strong> MKS HS75K servo pulling friction latch via high-strength fishing line tendons</li>
+    <li><strong>Compliance System:</strong> Rubber bands for yaw compliance, cylindrical tubes with linear spring for suspension</li>
+    <li><strong>Pitch-down Pivot:</strong> Spring-loaded pivot allowing up to 120° pitch after successful grasp</li>
+  </ul>
+  
+  <h3>Sensing and Perception</h3>
+  <ul>
+    <li><strong>RGBD Camera:</strong> Intel Realsense D435 (0.3-3m range) for tree detection and depth sensing</li>
+    <li><strong>Distance Sensor:</strong> VL53L1X time-of-flight sensor for precise gripper triggering</li>
+    <li><strong>IMU:</strong> For perch failure detection and attitude control</li>
+  </ul>
   <img src="assets/images/hardware.png" class="figure">
 
   <h2>Results</h2>
+  <p>
+    The SLAP system was validated through comprehensive indoor flight experiments at the Boeing Flight & Autonomy Laboratory at Stanford University:
+  </p>
+  
+  <h3>Perching Success Rate</h3>
+  <ul>
+    <li><strong>Overall Success Rate:</strong> 75% across 20 human-in-the-loop autonomous flight trials</li>
+    <li><strong>Success Definition:</strong> Tree detection, trajectory generation, site reach, gripper trigger, and maintained attachment for ≥10 seconds</li>
+    <li><strong>Failure Analysis:</strong> 5 failed trials total:
+      <ul>
+        <li>2 failures: Microspines slipping after successful perch (before 10s mark)</li>
+        <li>2 failures: Slap bands slipping from holders (insufficient glue during prototyping)</li>
+        <li>1 failure: Catastrophic gripper plastic failure</li>
+      </ul>
+    </li>
+  </ul>
+  
+  <h3>Failure Recovery Performance</h3>
+  <ul>
+    <li><strong>Recovery Success Rate:</strong> 100% (2/2 trials)</li>
+    <li><strong>Detection Speed:</strong> IMU-based failure detection identified slipping onset within 100ms</li>
+    <li><strong>Recovery Method:</strong> Drone stabilized at 1m offset from tree after failure detection</li>
+    <li><strong>Test Method:</strong> Controlled failures induced by filing down microspines to reduce engagement</li>
+  </ul>
+  
   <img src="assets/images/results.png" class="figure">
+
+  <h2>Citation</h2>
+  <pre style="background: #f5f5f5; border: 1px solid #ddd; border-radius: 4px; padding: 15px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 14px; overflow-x: auto;">@misc{dihoffmann2026slap,
+  title={SLAP: Slapband-based Autonomous Perching Drone with Failure Recovery for Vertical Tree Trunks},
+  author={Di, Julia and Hoffmann, Kenneth A. W. and Chen, Tony G. and Ren, Tian-Ao and Cutkosky, Mark},
+  year={2026},
+  eprint={2601.00238},
+  archivePrefix={arXiv},
+  primaryClass={cs.RO},
+  url={https://arxiv.org/abs/2601.00238}
+}</pre>
+
+  <h2>Acknowledgements</h2>
+  <p style="margin: 20px 0; line-height: 1.6;">
+    The authors thank James Biddle and the University Tree Program for permission to use a segment of a real tree for indoor flight testing. The authors also thank Jun En Low for his instructions on drone piloting and Joshua Dong for his work in early prototyping of the gripper design. This work was supported by EpiSys Science Inc. and subcontracted to Stanford's <a href="https://centerfordesignresearch.stanford.edu/" target="_blank" style="color: #0066cc; text-decoration: none;">Center for Design Research</a>. J. Di was additionally supported by a P.E.O. Scholarship and the Zonta International Amelia Earhart Scholarship at the time of work. In addition, J. Di, K. A. W. Hoffmann, and T. G. Chen were with the Department of Mechanical Engineering at Stanford University at the time of work.
+  </p>
 
   <footer>
     <p>
-      © 2026 SLAP Project • Stanford University
+      &copy; 2026 SLAP Project • Stanford University
     </p>
   </footer>
 
 </div>
 
 </body>
+
+<script src="script.js"></script>
+
 </html>
